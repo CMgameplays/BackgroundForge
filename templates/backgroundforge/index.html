@@ -3,41 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BackgroundForge</title>
+  <title>BackgroundForge — CMG Forge</title>
   <link rel="stylesheet" href="{{ url_for('backgroundforge.static', filename='style.css') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- ── Header ──────────────────────────────────────────────────────────── -->
-<header>
-  <div class="logo">
-    <div class="logo-icon">⚡</div>
-    Background<em>Forge</em>
-  </div>
-  <span class="version-badge">v1.0.0</span>
-  <div class="header-spacer"></div>
-  <span class="header-sub">CMG Forge</span>
-  <div class="ai-status">
+<!-- ── Navbar ────────────────────────────────────────────────────────────────── -->
+<nav class="forge-nav">
+  <a href="https://cmgforge.com" class="nav-brand">
+    <div class="nav-brand-mark">CF</div>
+    <span class="nav-brand-text">CMG <em>Forge</em></span>
+  </a>
+  <div class="nav-divider"></div>
+  <span class="nav-tool-name">Background Forge</span>
+  <div class="nav-spacer"></div>
+  <div class="nav-ai-status">
     <div class="ai-dot" id="aiStatusDot"></div>
-    <span id="aiStatusLabel">Loading AI…</span>
+    <span id="aiStatusLabel">Initializing</span>
   </div>
-</header>
+  <a href="https://cmgforge.com/tools" class="nav-link">All Tools</a>
+</nav>
 
-<!-- ── Workspace ───────────────────────────────────────────────────────── -->
+<!-- ── Workspace ─────────────────────────────────────────────────────────────── -->
 <div class="workspace">
 
-  <!-- ── Sidebar ──────────────────────────────────────────────────────── -->
+  <!-- ── Sidebar ───────────────────────────────────────────────────────────── -->
   <aside class="sidebar">
 
     <!-- Upload -->
     <div class="drop-zone" id="dropZone">
       <input type="file" id="fileInput" accept="image/*" multiple>
-      <div class="drop-icon">📂</div>
+      <div class="drop-icon">&#x2B21;</div>
       <div class="drop-title">Drop Images Here</div>
-      <div class="drop-sub">or click to browse — PNG, JPG, WEBP, BMP…</div>
+      <div class="drop-sub">or click to browse — PNG, JPG, WEBP, BMP</div>
     </div>
 
     <!-- Stats -->
@@ -59,34 +60,34 @@
     <!-- Mode -->
     <div class="section-label">Removal Mode</div>
     <div class="mode-tabs">
-      <button class="mode-tab active" id="modeAI">🤖 AI Remove</button>
-      <button class="mode-tab"        id="modeColor">🎨 Color Remove</button>
+      <button class="mode-tab active" id="modeAI">AI Remove</button>
+      <button class="mode-tab"        id="modeColor">Color Remove</button>
     </div>
 
-    <!-- ── AI Panel ──────────────────────────────────────────────────── -->
+    <!-- ── AI Panel ──────────────────────────────────────────────────────── -->
     <div class="settings-panel active" id="panelAI">
 
       <div>
         <label class="field-label">AI Model</label>
         <select class="select-input" id="modelSelect">
-          <option value="balanced">Balanced — u2net ✓ Ready</option>
-          <option value="fast">Fast — u2netp (1st use: ~170 MB download)</option>
-          <option value="hq">High Quality — ISNet (1st use: ~180 MB download)</option>
-          <option value="person">Person Seg — u2net (1st use: ~176 MB download)</option>
+          <option value="balanced">Balanced — u2net (ready)</option>
+          <option value="fast">Fast — u2netp (first use: ~170 MB)</option>
+          <option value="hq">High Quality — ISNet (first use: ~180 MB)</option>
+          <option value="person">Person Seg — u2net (first use: ~176 MB)</option>
         </select>
       </div>
 
       <div class="warn-box" id="modelWarning">
-        ⚠ This model will be downloaded (~170–180 MB) on first use. Processing will be slow that one time only — then it's cached.
+        Model downloads ~170-180 MB on first use. Processing will be slower that one run only, then it's cached.
       </div>
 
       <div class="info-box">
-        AI automatically detects and removes backgrounds. Works great on AI-generated images, product shots, and portraits. Models are cached after the first download.
+        AI detects and removes backgrounds automatically. Works well on generated images, product shots, and portraits. Models cache after the first download.
       </div>
 
     </div>
 
-    <!-- ── Color Panel ────────────────────────────────────────────────── -->
+    <!-- ── Color Panel ────────────────────────────────────────────────────── -->
     <div class="settings-panel" id="panelColor">
 
       <div>
@@ -97,7 +98,7 @@
             <input type="color" id="colorInput" value="#ffffff">
           </div>
           <input type="text" class="color-hex" id="colorHex" value="#FFFFFF" maxlength="7" placeholder="#FFFFFF">
-          <button class="btn-eyedrop" id="btnEyedrop" title="Sample color from image">💧</button>
+          <button class="btn-eyedrop" id="btnEyedrop" title="Sample color from image">&#x25C9;</button>
         </div>
       </div>
 
@@ -114,7 +115,7 @@
         <label class="field-label">Fill Method</label>
         <div class="method-options">
           <button class="method-opt active" id="methodFlood"
-            title="Flood fill from image edges — best for solid backgrounds">Flood Fill</button>
+            title="Flood fill from image edges -- best for solid backgrounds">Flood Fill</button>
           <button class="method-opt" id="methodGlobal"
             title="Remove all matching pixels globally">Global</button>
         </div>
@@ -135,20 +136,20 @@
     <div class="section-label">Actions</div>
 
     <button class="btn btn-primary" id="btnProcess" disabled>
-      ▶ &nbsp;Process Images
+      &#x25B6;&nbsp; Process Images
     </button>
 
     <button class="btn btn-secondary" id="btnDownloadZip" disabled>
-      ↓ &nbsp;Download All as ZIP
+      &#x2193;&nbsp; Download All as ZIP
     </button>
 
     <button class="btn btn-danger-ghost" id="btnClearAll" disabled>
-      🗑 &nbsp;Clear All
+      Clear All
     </button>
 
   </aside>
 
-  <!-- ── Main Content ──────────────────────────────────────────────────── -->
+  <!-- ── Main Content ───────────────────────────────────────────────────────── -->
   <div class="main-content">
 
     <!-- Toolbar -->
@@ -156,14 +157,14 @@
       <span class="toolbar-title" id="toolbarLabel">
         <strong>No images loaded</strong>
       </span>
-      <button class="btn-sm accent" id="btnDownloadZipSm" disabled>↓ ZIP</button>
+      <button class="btn-sm accent" id="btnDownloadZipSm" disabled>&#x2193; ZIP</button>
     </div>
 
     <!-- Preview Grid -->
     <div class="preview-area">
       <div class="preview-grid" id="previewGrid">
         <div class="empty-state">
-          <div class="empty-icon">🖼</div>
+          <div class="empty-icon">&#x2B21;</div>
           <div class="empty-title">No Images Loaded</div>
           <div class="empty-sub">Drop images into the sidebar to get started</div>
         </div>
@@ -182,17 +183,23 @@
   </div>
 </div>
 
-<!-- ── Eye-Dropper Modal ────────────────────────────────────────────────── -->
+<!-- ── Footer ────────────────────────────────────────────────────────────────── -->
+<footer class="forge-footer">
+  <span>&#169; CMG Forge &mdash; Free, forever.</span>
+  <a href="https://cmgforge.com">cmgforge.com</a>
+</footer>
+
+<!-- ── Eye-Dropper Modal ──────────────────────────────────────────────────────── -->
 <div class="modal-overlay" id="eyedropModal">
   <div class="modal-box">
-    <div class="modal-title">💧 Sample Background Color</div>
-    <div class="modal-sub">Click on the background area of your image to pick its color.</div>
+    <div class="modal-title">Sample Background Color</div>
+    <div class="modal-sub">Click the background area of your image to pick its color.</div>
     <div class="eyedrop-canvas-wrap">
       <canvas id="eyedropCanvas"></canvas>
     </div>
     <div class="eyedrop-preview">
       <div class="eyedrop-color-box" id="eyedropColorBox"></div>
-      <span class="eyedrop-color-val" id="eyedropColorVal">Hover to preview color…</span>
+      <span class="eyedrop-color-val" id="eyedropColorVal">Hover to preview color</span>
     </div>
     <div class="modal-btns">
       <button class="modal-btn"         id="btnEyedropCancel">Cancel</button>
@@ -202,16 +209,6 @@
 </div>
 
 <script src="{{ url_for('backgroundforge.static', filename='app.js') }}"></script>
-
-<!-- Hub back button -->
-<a href="/" class="hub-back-btn">&#8592; Hub</a>
-<style>
-  .hub-back-btn { position:fixed; bottom:1.25rem; left:1.25rem; padding:.4rem .9rem;
-    background:rgba(22,22,31,.9); border:1px solid #9b5de5; border-radius:999px;
-    color:#9b5de5; font-family:'Rajdhani',sans-serif; font-size:.85rem; font-weight:600;
-    text-decoration:none; backdrop-filter:blur(6px); z-index:9999; transition:.15s; }
-  .hub-back-btn:hover { background:#9b5de5; color:#fff; }
-</style>
 
 </body>
 </html>
